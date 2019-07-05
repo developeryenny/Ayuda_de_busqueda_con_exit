@@ -1,0 +1,15 @@
+FUNCTION CONVERSION_EXIT_ZHR01_OUTPUT.
+*"--------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(INPUT) TYPE  ZHRED_ID_EMPLEADO
+*"  EXPORTING
+*"     REFERENCE(OUTPUT) TYPE  ZHRED_ID_EMPLEADO
+*"--------------------------------------------------------------------
+CALL FUNCTION 'CONVERSION_EXIT_ALPHA_OUTPUT'
+  EXPORTING
+    input         = input
+ IMPORTING
+   OUTPUT        = output.
+
+ENDFUNCTION.
