@@ -1,15 +1,23 @@
-FUNCTION CONVERSION_EXIT_ZHR01_OUTPUT.
-*"--------------------------------------------------------------------
+FUNCTION ZHRF4_TEST.
+*"----------------------------------------------------------------------
 *"*"Local Interface:
-*"  IMPORTING
-*"     REFERENCE(INPUT) TYPE  ZHRED_ID_EMPLEADO
-*"  EXPORTING
-*"     REFERENCE(OUTPUT) TYPE  ZHRED_ID_EMPLEADO
-*"--------------------------------------------------------------------
-CALL FUNCTION 'CONVERSION_EXIT_ALPHA_OUTPUT'
-  EXPORTING
-    input         = input
- IMPORTING
-   OUTPUT        = output.
+*"  TABLES
+*"      SHLP_TAB TYPE  SHLP_DESCR_TAB_T
+*"      RECORD_TAB STRUCTURE  SEAHLPRES
+*"  CHANGING
+*"     VALUE(SHLP) TYPE  SHLP_DESCR_T
+*"     VALUE(CALLCONTROL) LIKE  DDSHF4CTRL STRUCTURE  DDSHF4CTRL
+*"----------------------------------------------------------------------
+DATA: gt_aux LIKE TABLE OF record_tab.
+DATA: gs_record_tab LIKE LINE OF record_tab.
 
+IF callcontrol-step EQ 'DISP'.
+  BREAK-POINT.
+  LOOP AT record_tab INTO gs_record_tab.
+    IF gs_record_tab-string+94(1) = 'M'.
+      APPEND gs_record_tab TO gt_aux.
+    ENDIF.
+  ENDLOOP.
+    record_tab[] = gt_aux[].
+    endif.
 ENDFUNCTION.
